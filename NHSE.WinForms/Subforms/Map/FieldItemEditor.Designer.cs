@@ -153,6 +153,7 @@
             this.CHK_RedirectExtensionLoad = new System.Windows.Forms.CheckBox();
             this.CHK_MoveOnDrag = new System.Windows.Forms.CheckBox();
             this.CHK_FieldItemSnap = new System.Windows.Forms.CheckBox();
+            this.B_FlattenAllRoads = new System.Windows.Forms.ToolStripMenuItem();
             this.CM_Click.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Map)).BeginInit();
             this.CM_Picture.SuspendLayout();
@@ -1309,7 +1310,8 @@
             this.B_SetAllRoadTiles,
             this.B_ClearPlacedDesigns,
             this.B_ImportPlacedDesigns,
-            this.B_ExportPlacedDesigns});
+            this.B_ExportPlacedDesigns,
+            this.B_FlattenAllRoads});
             this.CM_Terrain.Name = "CM_Picture";
             this.CM_Terrain.ShowImageMargin = false;
             this.CM_Terrain.Size = new System.Drawing.Size(225, 136);
@@ -1355,6 +1357,13 @@
             this.B_ExportPlacedDesigns.Size = new System.Drawing.Size(224, 22);
             this.B_ExportPlacedDesigns.Text = "Export all Placed Design Choices";
             this.B_ExportPlacedDesigns.Click += new System.EventHandler(this.B_ExportPlacedDesigns_Click);
+            // 
+            // B_FlattenAllRoads
+            // 
+            this.B_FlattenAllRoads.Name = "B_FlattenAllRoads";
+            this.B_FlattenAllRoads.Size = new System.Drawing.Size(224, 22);
+            this.B_FlattenAllRoads.Text = "Flatten All Roads";
+            this.B_FlattenAllRoads.Click += new System.EventHandler(this.B_FlattenAllRoads_Click);
             // 
             // RB_Item
             // 
@@ -1624,5 +1633,6 @@
         private System.Windows.Forms.Button B_TerrainBrush;
         private System.Windows.Forms.ToolStripMenuItem B_RemoveEditor;
         private System.Windows.Forms.ToolStripMenuItem Menu_Activate;
+        private System.Windows.Forms.ToolStripMenuItem B_FlattenAllRoads;
     }
 }

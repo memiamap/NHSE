@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace NHSE.Core
 {
@@ -150,6 +151,14 @@ namespace NHSE.Core
 
             var tile = GetTile(x, y);
             return TerrainTileColor.GetTileColor(tile).ToArgb();
+        }
+
+        public void FlattenRoads()
+        {
+            foreach (var tile in Tiles.Where(t => t.UnitModelRoad.IsRoad()))
+            {
+                tile.FlattenRoad();
+            }
         }
 
         private ushort GetTileAcre(int x, int y)

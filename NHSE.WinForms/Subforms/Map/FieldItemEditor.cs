@@ -1130,6 +1130,14 @@ namespace NHSE.WinForms
         {
             tbeForm?.Close();
         }
+
+        private void B_FlattenAllRoads_Click(object sender, EventArgs e)
+        {
+            Map.Terrain.FlattenRoads();
+
+            ReloadBuildingsTerrain();
+            System.Media.SystemSounds.Asterisk.Play();
+        }
     }
 
     public interface IItemLayerEditor

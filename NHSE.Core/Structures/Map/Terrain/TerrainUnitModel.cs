@@ -1,4 +1,6 @@
-﻿using static NHSE.Core.TerrainUnitModel;
+﻿using System;
+using System.Collections.Generic;
+using static NHSE.Core.TerrainUnitModel;
 
 namespace NHSE.Core
 {
@@ -257,6 +259,8 @@ namespace NHSE.Core
 
     public static class TerrainUnitModelExtensions
     {
+        private static Dictionary<TerrainUnitModel, TerrainUnitModel> _flatRoadMap = new();
+
         public static bool IsRoad(this TerrainUnitModel t) => t >= RoadBrick0A || (RoadSoil0A <= t && t <= RoadStone8A);
         public static bool IsRoadWood(this TerrainUnitModel t) => RoadWood0A <= t && t <= RoadWood8A;
         public static bool IsRoadTile(this TerrainUnitModel t) => RoadTile0A <= t && t <= RoadTile8A;
@@ -270,5 +274,29 @@ namespace NHSE.Core
         public static bool IsFall(this TerrainUnitModel t) => (Fall101 <= t && t <= Fall404) || (Fall103 <= t && t <= Fall424);
         public static bool IsCliff(this TerrainUnitModel t) => (Cliff0A <= t && t <= Cliff8) || (t == Cliff2B);
         public static bool IsRiver(this TerrainUnitModel t) => River0A <= t && t <= River8A;
+
+        public static bool TryGetFlatRoadEquivalent(this TerrainUnitModel t, out TerrainUnitModel? flatRoadTerrainUnitModel)
+        {
+            bool returnValue = false;
+            flatRoadTerrainUnitModel = null;
+
+            if (t.IsRoad())
+            {
+                if (!_flatRoadMap.ContainsKey(t))
+                {
+                    var roadName = t.ToString();
+                    var flatRoadName = roadName.Substring(0, roadName.Length - 2) + "8A";
+                    if (Enum.TryParse(flatRoadName, out TerrainUnitModel flatRoadNameEnum))
+                    {
+                        _flatRoadMap.Add(t, flatRoadNameEnum);
+                    }
+                }
+
+                flatRoadTerrainUnitModel = _flatRoadMap[t];
+                returnValue = true;
+            }
+
+            return returnValue;
+        }
     }
 }

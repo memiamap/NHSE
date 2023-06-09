@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
@@ -76,6 +77,16 @@ namespace NHSE.Core
         }
 
         public bool Rotate() => UnitModelRoad != 0 ? RotateRoad() : RotateTerrain();
+
+        public void FlattenRoad()
+        {
+            if (UnitModelRoad.TryGetFlatRoadEquivalent(out var flatRoadTerrainUnitModel))
+            {
+                UnitModelRoad = flatRoadTerrainUnitModel!.Value;
+                LandMakingAngleRoad = 0;
+                VariationRoad = 0;
+            }
+        }
 
         private bool RotateTerrain()
         {
